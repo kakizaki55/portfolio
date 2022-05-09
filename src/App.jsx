@@ -1,3 +1,11 @@
+import Layout from './components/Layout/Layout';
+import Main from './components/Main/Main';
 export default function App() {
-  return <h1>Hello World</h1>;
+  return (
+    <div>
+      <Layout>
+        <Main></Main>
+      </Layout>
+    </div>
+  );
 }
