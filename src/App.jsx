@@ -1,11 +1,15 @@
 import './App.css'
+import Main from './R3f'
+import { Canvas } from "@react-three/fiber"
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
     <>
-    <h1>Hello World from minoka</h1>
+      <Canvas>
+        <Main/>
+      </Canvas>
     </>
   )
 }
