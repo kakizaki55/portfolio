@@ -10,22 +10,21 @@ import { KeyDisplay } from './utils/KeyDisplay';
 const Fox = (props) => {
 
   const fox = useGLTF('./Fox/glTF/Fox.gltf')
+
   const animations = useAnimations(fox.animations, fox.scene)
+  const [subscribeKeys, getKeys] = useKeyboardControls()
   
   const foxRef = useRef()
   const foxBodyRef = useRef()
 
   const [orientation, setOrientation] = useState(Math.PI);
-  const [subscribeKeys, getKeys] = useKeyboardControls()
-  
-
-
+  const [animationName, setAnimationName] = useState("Survey");
   
 
   //debugging controller
-  const { animationName } = useControls('fox', {
-    animationName: { options: animations.names }
-  })
+  // const { animationName } = useControls('fox', {
+  //   animationName: { options: animations.names }
+  // })
   const { speed } = useControls("Character", {
     speed: { value: 150, min: 100, max: 1000, step: 10 } // Current speed of the model
   });
@@ -34,12 +33,18 @@ const Fox = (props) => {
   useFrame((state, delta) => {
     // retrieve keys
     const keys = getKeys();
-    const { forward, back, left, right } = keys;
+    let { forward, back, left, right } = keys;
 
+    
     // Keys pressed counter 
     const nbOfKeysPressed = Object.values(keys).filter((value) => value).length
+    if (forward && back && nbOfKeysPressed === 2) forward = false;
+    if (left && right && nbOfKeysPressed === 2) left = false;
 
-    /**
+    //setting animations
+    setAnimationName(nbOfKeysPressed === 0 ? "Survey" : "Walk");
+
+    /**w
      * Model movement
      */
     const linvelY = foxBodyRef.current.linvel().y;
@@ -87,20 +92,17 @@ const Fox = (props) => {
     
     // Forward-Rightward
       if (keysCombinations.forwardRight && aTanAngle != topRightAngle) {
-        console.log('forward-right')
         setOrientation((prevState) => prevState + angle * (aTanAngle > topRightAngle ? -1 : 1)
           );
       }
       
       // Forward-Leftward
       if (keysCombinations.forwardLeft && aTanAngle != topLeftAngle) {
-        console.log('forward-left')
         setOrientation((prevState) => prevState + angle * (aTanAngle > topLeftAngle ? -1 : 1));
         }
       
       // Backward-Rightward
       if (keysCombinations.backRight && aTanAngle != bottomRightAngle) {
-        console.log('back-right')
         setOrientation(
           (prevState) =>
           prevState +
@@ -111,7 +113,6 @@ const Fox = (props) => {
         
       // Backward-Leftward
       if (keysCombinations.backLeft && aTanAngle != bottomLeftAngle) {
-        console.log('back-left')
         setOrientation(
           (prevState) =>
           prevState +
@@ -122,7 +123,6 @@ const Fox = (props) => {
           
           // Rightward
           if (keysCombinations.right && Math.sin(orientation) != 1) {
-            console.log('right')
             setOrientation(
               (prevState) => prevState + angle * (Math.cos(orientation) > 0 ? 1 : -1)
               );
@@ -130,7 +130,6 @@ const Fox = (props) => {
             
             // Leftward
             if (keysCombinations.left && Math.sin(orientation) != -1) {
-              console.log('left')
               setOrientation(
                 (prevState) => prevState + angle * (Math.cos(orientation) > 0 ? -1 : 1)
                 );
@@ -138,7 +137,6 @@ const Fox = (props) => {
               
               // Forward
               if (keysCombinations.forward && Math.cos(orientation) != -1) {
-                console.log('forward')
                 setOrientation(
                   (prevState) => prevState + angle * (Math.sin(orientation) > 0 ? 1 : -1)
                   );
@@ -146,7 +144,6 @@ const Fox = (props) => {
                 
                 // Backward
                 if (keysCombinations.back && Math.cos(orientation) != 1) {
-                  console.log('backword')
                   setOrientation(
                     (prevState) => prevState + angle * (Math.sin(orientation) > 0 ? -1 : 1)
                     );
@@ -156,35 +153,40 @@ const Fox = (props) => {
     const quaternionRotation = new THREE.Quaternion();
     quaternionRotation.setFromEuler(new THREE.Euler(0, orientation, 0));
     foxBodyRef.current.setRotation(quaternionRotation);
-   
     
-    /**
-     * Camera Movement
-     */
+    
+    //Camera Movement 
     if (!props.orbitControls) {
-      const knightPosition = foxBodyRef.current.translation();
+      const foxPosition = foxBodyRef.current.translation();
       
       const cameraPosition = new THREE.Vector3();
-      cameraPosition.copy(knightPosition);
-      cameraPosition.z += 5;
-      cameraPosition.y += 2.5;
+      cameraPosition.copy(foxPosition);
+      cameraPosition.z += 10;
+      cameraPosition.y += 5;
 
       const cameraTarget = new THREE.Vector3();
-      cameraTarget.copy(knightPosition);
-      cameraTarget.y += 0.25;
+      cameraTarget.copy(foxPosition);
+      cameraTarget.y += 0.4;
       
       state.camera.position.copy(cameraPosition);
       state.camera.lookAt(cameraTarget);
     }
+
+
+    //Animation
+    // if(forward || back || left || right){
+    //   const action = animations.actions.walk
+    //   action.reset().fadeIn(0.5).play()
+    // } 
+
   });
   
   useEffect(()=> {
-    // animation
-    const action = animations.actions[animationName]
-    action.reset().fadeIn(0.5).play()
+    //animation
+    animations.actions[animationName].fadeIn(0.2).play();
+    console.log('animationName', animationName)
     
     // Key Display
-    const keysPressed = {}
     const keyDisplayQueue = new KeyDisplay();
     document.addEventListener('keydown', (event) => {
         keyDisplayQueue.down(event.key)
@@ -200,7 +202,7 @@ const Fox = (props) => {
     }, false);
 
     return () => {
-      action.fadeOut(0.5)
+      animations.actions[animationName].fadeOut(0.2).stop()
     }
   },[animationName])
   
