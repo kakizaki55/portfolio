@@ -183,7 +183,7 @@ const Fox = (props) => {
   
   useEffect(()=> {
     //animation
-    animations.actions[animationName].fadeIn(0.2).play();
+    animations.actions[animationName].fadeIn(.2).play();
     console.log('animationName', animationName)
     
     // Key Display
@@ -202,23 +202,20 @@ const Fox = (props) => {
     }, false);
 
     return () => {
-      animations.actions[animationName].fadeOut(0.2).stop()
+      setTimeout(()=> {
+        animations.actions[animationName].fadeOut(.2).stop()
+      },200)
     }
   },[animationName])
   
   return (
     <>
       <RigidBody 
-        ref={ foxBodyRef }
-        // lockRotations={ true }
-        // rotation='lock'
-        type='hull'>
+        ref={ foxBodyRef }>
         <mesh 
-          // ref={foxRef}
-          castShadow  >
+          ref={foxRef} >
           <primitive
             ref={ foxRef }
-            castShadow
             object={ fox.scene }
             scale={ 0.02 }
             />

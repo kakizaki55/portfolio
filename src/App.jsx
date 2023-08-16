@@ -9,12 +9,6 @@ function App() {
   // const [count, setCount] = useState(0)
 
   const cameraSettings = {
-    // fov: 75,
-    // // zoom: 75,
-    // near: 0.1,
-    // far: 200,
-    // position: [ 2, 2, 6 ]
-    //new settings
     fov: 45,
     near: 0.1,
     far: 200,
@@ -27,7 +21,6 @@ function App() {
       <Controller>
         <Canvas
           // orthographic
-          shadows
           dpr={ .25}
           gl={{
             antialias: false,

@@ -1,16 +1,16 @@
 import React from 'react'
 import { RigidBody } from "@react-three/rapier"
+import { Sphere } from "@react-three/drei"
 
 const Ball = (props) => {
   return (
     <>
-    <RigidBody colliders='hull'>
-      <mesh {...props}>
-        <sphereGeometry arg={[1,1,4]}/>
-        <meshNormalMaterial/>
-      </mesh>
-    </RigidBody>
-
+      <RigidBody colliders='hull'>
+        <Sphere 
+          position={[0,3,-3]}>
+          <meshStandardMaterial attach="material" />
+        </Sphere>
+      </RigidBody>
     </>
   )
 }
