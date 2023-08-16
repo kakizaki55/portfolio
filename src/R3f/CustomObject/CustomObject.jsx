@@ -22,7 +22,7 @@ const CustomObject = () => {
   },[positions])
 
   return (
-      <mesh>
+      <mesh castShadow>
         <bufferGeometry ref={geometryRef}>
             <bufferAttribute
             attach='attributes-position'

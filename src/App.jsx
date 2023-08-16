@@ -23,7 +23,8 @@ function App() {
         // orthographic
         // flat
         // linear
-        dpr={ .3}
+        shadows
+        dpr={ .25}
         gl={{
           antialias: false,
           toneMapping: THREE.ACESFilmicToneMapping,
