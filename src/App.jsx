@@ -3,6 +3,7 @@ import Main from './R3f'
 import { Canvas } from "@react-three/fiber"
 import * as THREE from 'three'
 
+
 function App() {
   // const [count, setCount] = useState(0)
 
@@ -17,11 +18,12 @@ function App() {
 
   return (
     <>
+      {/* <Leva collapsed /> */}
       <Canvas
         // orthographic
         // flat
         // linear
-        dpr={ .25 }
+        dpr={ .3}
         gl={{
           antialias: false,
           toneMapping: THREE.ACESFilmicToneMapping,
