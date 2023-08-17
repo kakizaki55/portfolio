@@ -1,15 +1,15 @@
 import React from 'react'
 import { RigidBody } from "@react-three/rapier"
-import { Sphere } from "@react-three/drei"
+import { Icosahedron } from "@react-three/drei"
 
 const Ball = () => {
   return (
     <>
       <RigidBody colliders='hull'>
-        <Sphere 
-          position={[0,3,-3]}>
+        <Icosahedron 
+          position={[0,3,-3]} >
           <meshStandardMaterial attach="material" />
-        </Sphere>
+        </Icosahedron>
       </RigidBody>
     </>
   )

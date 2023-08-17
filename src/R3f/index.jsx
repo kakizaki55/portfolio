@@ -9,6 +9,7 @@ import Fox from "./Fox/Fox";
 import Ball from './Ball/Ball.jsx'
 import Floor from './Floor/Floor'
 import Grass from "./Grass/Grass";
+import GrassGroup from "./Grass/GrassGroup";
 
 
 
@@ -46,7 +47,7 @@ const Main = () =>  {
         intensity={ 1.5 } />
       <ambientLight intensity={ 0.1 } />
         <Floor />
-        <Grass />
+        <GrassGroup />
         <Fox orbitControls={orbitControls}/>
         <Ball position={[3, 2, 2]} />
       </Physics>
