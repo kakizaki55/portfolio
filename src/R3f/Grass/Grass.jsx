@@ -29,7 +29,7 @@ const Grass = () => {
           scale={ 0.05 }
           position={[position.x, position.y, position.z]}
           rotation={[0, rotation.y, 0]}
-          inject={<meshBasicMaterial color={new THREE.Color(`rgb(${color.r}, ${color.g}, ${color.b})`)}/>}
+          inject={<meshBasicMaterial color={new THREE.Color(`rgb(${color.r}, ${color.g}, ${color.b})`)}/>}a
           />
       </mesh>
       {/* <GrassGroup/> */}
