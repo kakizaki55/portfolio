@@ -8,7 +8,7 @@ import { Physics } from "@react-three/rapier";
 import Fox from "./Fox/Fox";
 import Ball from './Ball/Ball.jsx'
 import Floor from './Floor/Floor'
-import SpaceDust from "./SpaceDust/SpaceDust"
+import Grass from "./Grass/Grass";
 
 
 
@@ -36,17 +36,17 @@ const Main = () =>  {
       { perfVisible && <Perf position="top-left" /> }
       { orbitControls && <OrbitControls makeDefault />}
       {/* { debug && <Debug />} */}
+      <Physics
+        //debug
+        // timeStep='vary' 
+        >
       <directionalLight
         ref={directionalLight}
         position={[5,2,5]}
         intensity={ 1.5 } />
       <ambientLight intensity={ 0.1 } />
-      {/* <fog attach="fog" args={["grey", 0, 40]} /> */}
-      {/* <SpaceDust /> */}
-      <Physics
-        //debug
-        timeStep='vary' >
         <Floor />
+        <Grass />
         <Fox orbitControls={orbitControls}/>
         <Ball position={[3, 2, 2]} />
       </Physics>

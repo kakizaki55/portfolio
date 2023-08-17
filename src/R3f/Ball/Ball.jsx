@@ -2,7 +2,7 @@ import React from 'react'
 import { RigidBody } from "@react-three/rapier"
 import { Sphere } from "@react-three/drei"
 
-const Ball = (props) => {
+const Ball = () => {
   return (
     <>
       <RigidBody colliders='hull'>

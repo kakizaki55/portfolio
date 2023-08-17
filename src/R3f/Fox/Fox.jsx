@@ -5,11 +5,11 @@ import { RigidBody } from "@react-three/rapier";
 import { useControls } from 'leva'
 import { useFrame } from "@react-three/fiber";
 import * as THREE from 'three'
-import { KeyDisplay } from './utils/KeyDisplay';
+import { KeyDisplay } from '../../Controller/utils/KeyDisplay';
 
 const Fox = (props) => {
 
-  const fox = useGLTF('./Fox/glTF/Fox.gltf')
+  const fox = useGLTF('./fox/glTF/Fox.gltf')
 
   const animations = useAnimations(fox.animations, fox.scene)
   const [subscribeKeys, getKeys] = useKeyboardControls()
