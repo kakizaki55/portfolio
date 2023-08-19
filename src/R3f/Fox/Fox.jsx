@@ -26,7 +26,7 @@ const Fox = (props) => {
   //   animationName: { options: animations.names }
   // })
   const { speed } = useControls("Character", {
-    speed: { value: 150, min: 100, max: 1000, step: 10 } // Current speed of the model
+    speed: { value: 130, min: 130, max: 500, step: 5 } // Current speed of the model
   });
   
   
