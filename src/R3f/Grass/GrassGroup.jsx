@@ -7,7 +7,7 @@ const GrassGroup = () => {
 
   return (
     <>
-    {Array(grassCount)
+    { Array(grassCount)
         .fill(true)
         .map((item, index) => (
           <Grass key={index} />

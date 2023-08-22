@@ -32,7 +32,6 @@ const Grass = () => {
           inject={<meshStandardMaterial opacity={0.5} color={new THREE.Color(`rgb(${color.r}, ${color.g}, ${color.b})`)}/>}a
           />
       </mesh>
-      {/* <GrassGroup/> */}
     </>
   )
 }
