@@ -21,7 +21,7 @@ function App() {
       <Controller>
         <Canvas
           // orthographic
-          dpr={ .25}
+          dpr={ .5}
           gl={{
             antialias: false,
             toneMapping: THREE.ACESFilmicToneMapping,
