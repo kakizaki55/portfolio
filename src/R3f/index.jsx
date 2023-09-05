@@ -8,7 +8,7 @@ import { Physics } from "@react-three/rapier";
 import Fox from "./Fox/Fox";
 import Ball from './Ball/Ball.jsx'
 import Floor from './Floor/Floor'
-import Grass from "./Grass/Grass";
+import Box from "./Box/Box";
 import GrassGroup from "./Grass/GrassGroup";
 
 
@@ -50,6 +50,7 @@ const Main = () =>  {
         <GrassGroup />
         <Fox orbitControls={orbitControls}/>
         <Ball position={[3, 2, 2]} />
+        <Box />
       </Physics>
     </>
   )
