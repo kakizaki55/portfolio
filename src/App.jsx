@@ -25,7 +25,7 @@ function App() {
           gl={{
             antialias: false,
             toneMapping: THREE.ACESFilmicToneMapping,
-            // outputColorSpace: THREE.LinearSRGBColorSpace
+            outputColorSpace: THREE.LinearSRGBColorSpace
           }}
           camera={cameraSettings}  >
             <Main/>

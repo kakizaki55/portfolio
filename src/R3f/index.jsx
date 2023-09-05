@@ -26,7 +26,7 @@ const Main = () =>  {
 
   const { orbitControls } = useControls("Debug", {
     orbitControls: false,
-    debug: true
+    // debug: true
   });
 
 
